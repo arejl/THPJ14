@@ -1,10 +1,10 @@
 require "open-uri"
 require "nokogiri"
-PAGE_URL = "http://annuaire-des-mairies.com/val-d-oise.html"
+PAGE_URL2 = "http://annuaire-des-mairies.com/val-d-oise.html"
 
 def get_city_names
   puts "Récupération de la liste des villes en cours..."
-  doc = Nokogiri::HTML(URI.open(PAGE_URL))
+  doc = Nokogiri::HTML(URI.open(PAGE_URL2))
   city_names_xml = doc.xpath('//a[@class="lientxt"]/text()')
   city_names = Array.new
   city_names_xml.each do |city|
@@ -16,7 +16,7 @@ end
 
 def get_townhall_url
   puts "Récupération des URL des sites des villes en cours..."
-  doc = Nokogiri::HTML(URI.open(PAGE_URL))
+  doc = Nokogiri::HTML(URI.open(PAGE_URL2))
   townhall_url_xml = doc.xpath('//a[@class="lientxt"]/@href')
   townhall_url = Array.new
   townhall_url_xml.each do |link|
