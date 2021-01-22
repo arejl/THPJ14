@@ -14,29 +14,6 @@ def get_PM_url
   return pm_url
 end
 
-=begin
-
-Cette même structure a marché pour le programme précédent, mais là le programme me renvoie des erreurs 404.
-Pourtant, les liens trouvés avec get_PM_url marchent bien dans mon navigateur.
-Il s'agit apparemment d'un problème de connexion au serveur via la gem URI ; j'ai essayé de le résoudre
-en changeant certains paramètres, mais ça n'a rien donné. J'ai donc utilisé une autre page pour récupérer les mails.
-
-def get_PM_email(pm_url)
-  puts "Récupération des emails en cours..."
-  pm_email = Array.new
-  pm_url.each do |pm_page|
-    doc = Nokogiri::HTML(URI.open(pm_page))
-    pm_email_xml = doc.xpath('//a[contains(href,"@assemblee-nationale.fr")]')
-    pm_email << pm_email_xml.text
-    puts pm_email_xml.text
-  rescue OpenURI::HTTPError => ex
-    puts "Link won't open"
-  end
-  puts "Liste des e-mails récupérée"
-  return pm_email
-end
-=end
-
 def get_PM_email
   puts "Récupération des e-mails en cours..."
   doc = Nokogiri::HTML(URI.open("https://mortchoisie.jimdofree.com/guide-pratique/d%C3%A9put%C3%A9s/"))
