@@ -3,6 +3,8 @@ require "nokogiri"
 PAGE_URL2 = "http://annuaire-des-mairies.com/val-d-oise.html"
 
 def get_city_names
+  #On récupère le nom de tous les liens, c'est-à-dire la liste des villes du 95.
+  #Ce sera la key du hash final.
   puts "Récupération de la liste des villes en cours..."
   doc = Nokogiri::HTML(URI.open(PAGE_URL2))
   city_names_xml = doc.xpath('//a[@class="lientxt"]/text()')
@@ -15,6 +17,7 @@ def get_city_names
 end
 
 def get_townhall_url
+  #On récupère les URL des liens des villes.
   puts "Récupération des URL des sites des villes en cours..."
   doc = Nokogiri::HTML(URI.open(PAGE_URL2))
   townhall_url_xml = doc.xpath('//a[@class="lientxt"]/@href')
@@ -27,6 +30,7 @@ def get_townhall_url
 end
 
 def get_townhall_email(townhall_url)
+  #A partir de la liste d'URL de la méthode précédente, cette méthode va ouvrir chaque URL et y récupérer l'e-mail cherché.
   puts "Récupération des emails en cours..."
   townhall_email = Array.new
   townhall_url.each do |city_url|
@@ -39,6 +43,7 @@ def get_townhall_email(townhall_url)
 end
 
 def combine_city_mail(city_names, townhall_email)
+  #On associe noms des villes et emails récupérés précédemment dans un array de hashes.
   puts "Formatage en cours"
   city_and_email = Hash[city_names.zip(townhall_email)]
   result = Array.new
