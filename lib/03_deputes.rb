@@ -23,7 +23,7 @@ def get_PM_email
   pm_email_xml = doc.xpath('//a/span[contains(text(),"@assemblee-nationale.fr")]')
   pm_email_xml.each do |mail|
     mail.text != nil ? pm_email << mail.text : pm_email << "(non fourni)"
-    #Pour les lignes 50 à 56, on récupère le prénom et le nom de famille depuis l'email, qui a la forme prenom.nom@assemblee-nationale.fr.
+    #Pour les lignes 30 à 36, on récupère le prénom et le nom de famille depuis l'email, qui a la forme prenom.nom@assemblee-nationale.fr.
     #On récupère donc le prénom en prenant tout ce qui est avant le premier point, et le nom en prenant ce qui est entre le premier point et l'arrobase.
     i = 0
     until mail.text[i] == "." || mail.text[i] == "@"
